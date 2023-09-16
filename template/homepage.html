@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div class="group">
+        <header>
+            <h1>Sectoral Sentiment Analyser</h1>
+        </header>
+        <nav>
+            <a href="/homepage">Home</a>
+        </nav>
+    </div>
+
+    <section>
+        <form method = "GET">
+            <div>
+                <span>
+                    <input type="radio" name="choice" onclick = 'func1()'><label>Auto</label>
+                    <input type="radio" name="choice" onclick = 'func2()'><label>Energy</label>
+                    <input type="radio" name="choice" onclick = 'func3()'><label>Transportation</label>
+                    <input type="radio" name="choice" onclick = 'func4()'><label>HealthCare</label>
+                </span>
+            </div>
+
+            <div>
+                <span >
+                    {% if sector %}
+                    <h4>{{sector}}</h4>
+                    {% endif %}
+                <ol>
+                    {% if all %}
+                        {% for key, value in all.items %}
+                            <li>{{key}} : <b>{{value}}</b></li>
+                        {% endfor %}
+                    {% else %}
+                        {% for key in news_list %}
+                            <li>{{key}}</li>
+                        {% endfor %}
+                    {% endif %}
+                </ol>
+            </div>
+
+            <div>
+                <span id = 'action' style = 'visibility: hidden'>
+                    <input type="submit" id = 'news_button' name ="name" value="Show top news">
+                </span>
+            </div>
+
+            <div>
+                <span>
+                    <input type="submit" name ="show" value="Show impact">
+                </span>
+            </div>
+        </form>
+    </section>
+
+    <script>
+        function func1(){
+            document.getElementById('action').style.visibility = 'visible';
+            document.getElementById('news_button').name = '1auto'
+        }
+        function func2(){
+            document.getElementById('action').style.visibility = 'visible';
+            document.getElementById('news_button').name = '2energy'
+        }
+        function func3(){
+            document.getElementById('action').style.visibility = 'visible';
+            document.getElementById('news_button').name = '3transport';
+        }
+        function func4(){
+            document.getElementById('action').style.visibility = 'visible';
+            document.getElementById('news_button').name = '4health';
+        }
+    </script>
+</body>
+</html>
